@@ -16,8 +16,6 @@ android {
         versionName = "1.0"
     }
 
-    // Personal-use keystore bundled with this project (password: btshutter).
-    // Generate your own before publishing the app anywhere.
     signingConfigs {
         create("release") {
             storeFile = file("shutter-release.jks")
