@@ -1,0 +1,15 @@
+com.example.btshutter:string/status_disconnected = 0x7f04000b
+com.example.btshutter:string/status_connecting = 0x7f04000a
+com.example.btshutter:string/status_connected = 0x7f040009
+com.example.btshutter:string/shutter_label = 0x7f040008
+com.example.btshutter:string/hint_ready = 0x7f040007
+com.example.btshutter:string/error_no_bt = 0x7f040002
+com.example.btshutter:string/hint_pair = 0x7f040006
+com.example.btshutter:string/error_not_supported = 0x7f040004
+com.example.btshutter:string/error_permission = 0x7f040005
+com.example.btshutter:string/error_no_paired = 0x7f040003
+com.example.btshutter:string/error_bt_off = 0x7f040001
+com.example.btshutter:mipmap/ic_launcher = 0x7f030000
+com.example.btshutter:drawable/ic_launcher_foreground = 0x7f020000
+com.example.btshutter:string/app_name = 0x7f040000
+com.example.btshutter:color/ic_launcher_background = 0x7f010000

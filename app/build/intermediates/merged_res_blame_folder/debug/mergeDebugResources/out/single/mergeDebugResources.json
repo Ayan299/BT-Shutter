@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.example.btshutter.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.btshutter.app-main-6:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.btshutter.app-debug-4:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.btshutter.app-main-6:/mipmap-anydpi/ic_launcher.xml"
+    }
+]

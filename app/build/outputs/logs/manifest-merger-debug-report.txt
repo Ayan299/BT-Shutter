@@ -1,0 +1,69 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:2:1-29:12
+	package
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:2:11-69
+uses-feature#android.hardware.bluetooth
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:4:5-6:35
+	android:required
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:6:9-32
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:5:9-50
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:8:5-10:38
+	android:maxSdkVersion
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:10:9-35
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:9:9-52
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:11:5-76
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:11:22-73
+application
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:13:5-28:19
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:13:5-28:19
+	android:extractNativeLibs
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	android:label
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:16:9-41
+	android:icon
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:15:9-43
+	android:allowBackup
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:14:9-36
+	android:theme
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:17:9-71
+activity#com.example.btshutter.MainActivity
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:19:9-27:20
+	android:screenOrientation
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:22:13-49
+	android:exported
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:21:13-36
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:20:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:23:13-26:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:24:17-69
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:24:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml:25:27-74
+uses-sdk
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Ayan\AndroidStudioProjects\BT-Shutter\app\src\main\AndroidManifest.xml

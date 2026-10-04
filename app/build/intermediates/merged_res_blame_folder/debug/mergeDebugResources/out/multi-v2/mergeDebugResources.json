@@ -1,0 +1,80 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.btshutter.app-debug-4:/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Ayan\\AndroidStudioProjects\\BT-Shutter\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Ayan\\AndroidStudioProjects\\BT-Shutter\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "-1,10,8,12,11,9,7,6,2,3,4,5",
+                        "startColumns": "-1,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "-1,722,575,894,788,645,452,354,66,117,197,277",
+                        "endColumns": "-1,64,68,66,104,75,121,96,49,78,78,75",
+                        "endOffsets": "-1,782,639,956,888,716,569,446,111,191,271,348"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "112,160,225,294,361,466,542,664,761,811,890,969",
+                        "endColumns": "47,64,68,66,104,75,121,96,49,78,78,75",
+                        "endOffsets": "155,220,289,356,461,537,659,756,806,885,964,1040"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Ayan\\.gradle\\daemon\\9.3.1\\com.example.btshutter.app-debug-4:\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Ayan\\AndroidStudioProjects\\BT-Shutter\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "56",
+                        "endOffsets": "69"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "56",
+                        "endOffsets": "107"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Ayan\\AndroidStudioProjects\\BT-Shutter\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "47",
+                        "endOffsets": "60"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "112",
+                        "endColumns": "47",
+                        "endOffsets": "155"
+                    }
+                }
+            ]
+        }
+    ]
+}

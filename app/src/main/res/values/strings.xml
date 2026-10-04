@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BT Shutter</string>
+    <string name="shutter_label">SHUTTER</string>
+    <string name="status_connected">Device is connected with \'%1$s\'</string>
+    <string name="status_connecting">Connecting to your other device…</string>
+    <string name="status_disconnected">Not connected to any device</string>
+    <string name="hint_ready">Open the camera on the other device, then tap the button.</string>
+    <string name="hint_pair">Pair the two devices in Bluetooth settings first, then tap the button to reconnect.</string>
+    <string name="error_no_bt">This device has no Bluetooth</string>
+    <string name="error_permission">Bluetooth permission is needed</string>
+    <string name="error_bt_off">Bluetooth is turned off</string>
+    <string name="error_not_supported">This phone doesn\'t support acting as a Bluetooth remote</string>
+    <string name="error_no_paired">No paired device found</string>
 </resources>
