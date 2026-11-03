@@ -42,6 +42,9 @@ class MainActivity : Activity() {
         const val REPORT_ID = 1           // Consumer Control (Volume Up) - used for phones
         const val KEYBOARD_REPORT_ID = 2  // Keyboard (F2 only) - used for computers
         const val CONNECT_TIMEOUT_MS = 6000L
+        const val SETUP_TIMEOUT_MS = 5000L
+        const val MSG_NOT_SUPPORTED = "Bluetooth remote not supported on this phone"
+        const val MSG_SETUP_INCOMPLETE = "Bluetooth remote setup didn't finish"
         const val PREFS = "btshutter"
         const val KEY_LAST_HOST = "last_host"
 
@@ -98,12 +101,23 @@ class MainActivity : Activity() {
     private var askedEnable = false
     private var candidates: List<BluetoothDevice> = emptyList()
     private var candidateIndex = 0
+    private var trying: BluetoothDevice? = null
+    private val failed = mutableListOf<String>()
+    private var setupTimedOut = false
 
     private lateinit var statusView: TextView
     private lateinit var hintView: TextView
     private lateinit var shutter: Button
 
     private val nextCandidate = Runnable { tryNextCandidate() }
+
+    private val setupCheck = Runnable {
+        if (!registered && hid != null) {
+            setupTimedOut = true
+            problem = MSG_SETUP_INCOMPLETE
+            updateUi()
+        }
+    }
 
     private val serviceListener = object : BluetoothProfile.ServiceListener {
         override fun onServiceConnected(profile: Int, proxy: BluetoothProfile) {
@@ -117,7 +131,13 @@ class MainActivity : Activity() {
                 BluetoothHidDevice.SUBCLASS1_KEYBOARD,
                 HID_DESCRIPTOR
             )
-            h.registerApp(sdp, null, null, mainExecutor, hidCallback)
+            val ok = h.registerApp(sdp, null, null, mainExecutor, hidCallback)
+            if (ok) {
+                ui.postDelayed(setupCheck, SETUP_TIMEOUT_MS)
+            } else {
+                problem = MSG_NOT_SUPPORTED
+                updateUi()
+            }
         }
 
         override fun onServiceDisconnected(profile: Int) {
@@ -135,6 +155,9 @@ class MainActivity : Activity() {
         override fun onAppStatusChanged(pluggedDevice: BluetoothDevice?, registered: Boolean) {
             this@MainActivity.registered = registered
             if (registered) {
+                ui.removeCallbacks(setupCheck)
+                setupTimedOut = false
+                problem = null
                 if (pluggedDevice != null) host = pluggedDevice
                 startAutoConnect()
             } else {
@@ -150,6 +173,8 @@ class MainActivity : Activity() {
                     host = device
                     problem = null
                     searching = false
+                    trying = null
+                    failed.clear()
                     candidateIndex = candidates.size
                     ui.removeCallbacks(nextCandidate)
                     getSharedPreferences(PREFS, MODE_PRIVATE)
@@ -157,7 +182,7 @@ class MainActivity : Activity() {
                 }
                 BluetoothProfile.STATE_DISCONNECTED -> {
                     if (host?.address == device.address) host = null
-                    if (host == null && searching && candidateIndex < candidates.size) {
+                    if (host == null && searching && device.address == trying?.address) {
                         ui.postDelayed(nextCandidate, 300)
                     }
                 }
@@ -278,7 +303,9 @@ class MainActivity : Activity() {
             shutter.alpha = 1f
         } else {
             statusView.text = problem
-                ?: if (searching) "Connecting to your other device…" else "Not connected to any device"
+                ?: if (searching) {
+                    trying?.let { "Trying ${nameOf(it)}…" } ?: "Connecting to your other device…"
+                } else "Not connected to any device"
             statusView.setTextColor(AMBER)
             hintView.text = "Pair the two devices in Bluetooth settings first, then tap the button to reconnect."
             shutter.alpha = 0.45f
@@ -298,9 +325,9 @@ class MainActivity : Activity() {
             return
         }
         shutter.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
-        // Computers get F2; phones (and anything else) get Volume Up as before.
-        val isComputer = d.bluetoothClass?.majorDeviceClass == BluetoothClass.Device.Major.COMPUTER
-        val reportId = if (isComputer) KEYBOARD_REPORT_ID else REPORT_ID
+        // Only phones get Volume Up; anything else (computers, unknown) gets F2.
+        val isPhone = d.bluetoothClass?.majorDeviceClass == BluetoothClass.Device.Major.PHONE
+        val reportId = if (isPhone) REPORT_ID else KEYBOARD_REPORT_ID
         h.sendReport(d, reportId, byteArrayOf(0x01))                          // key down
         ui.postDelayed({ hid?.sendReport(d, reportId, byteArrayOf(0x00)) }, 80) // key up
     }
@@ -337,12 +364,12 @@ class MainActivity : Activity() {
             return
         }
 
-        problem = null
+        problem = if (setupTimedOut && !registered) MSG_SETUP_INCOMPLETE else null
         if (hid == null) {
             if (!proxyRequested) {
                 proxyRequested = bt.getProfileProxy(this, serviceListener, BluetoothProfile.HID_DEVICE)
                 if (!proxyRequested) {
-                    problem = "This phone doesn't support acting as a Bluetooth remote"
+                    problem = MSG_NOT_SUPPORTED
                 }
             }
         } else if (registered && host == null) {
@@ -365,14 +392,22 @@ class MainActivity : Activity() {
 
         val last = getSharedPreferences(PREFS, MODE_PRIVATE).getString(KEY_LAST_HOST, null)
         candidates = (bt.bondedDevices ?: emptySet<BluetoothDevice>())
-            .filter { d ->
-                val major = d.bluetoothClass?.majorDeviceClass
-                major == null ||
-                    major == BluetoothClass.Device.Major.PHONE ||
-                    major == BluetoothClass.Device.Major.COMPUTER
-            }
-            .sortedByDescending { it.address == last }
+            .sortedWith(
+                compareBy<BluetoothDevice>(
+                    { if (it.address == last) 0 else 1 },
+                    {
+                        when (it.bluetoothClass?.majorDeviceClass) {
+                            BluetoothClass.Device.Major.COMPUTER -> 0
+                            BluetoothClass.Device.Major.PHONE -> 1
+                            else -> 2
+                        }
+                    }
+                )
+            )
         candidateIndex = 0
+        trying = null
+        failed.clear()
+        problem = null
 
         if (candidates.isEmpty()) {
             problem = "No paired device found"
@@ -382,13 +417,24 @@ class MainActivity : Activity() {
 
     private fun tryNextCandidate() {
         ui.removeCallbacks(nextCandidate)
-        if (host != null || candidateIndex >= candidates.size) {
+        if (host != null) {
             searching = false
+            trying = null
+            updateUi()
+            return
+        }
+        // The device we were trying didn't connect in time (or refused).
+        trying?.let { failed.add(nameOf(it)) }
+        trying = null
+        if (candidateIndex >= candidates.size) {
+            searching = false
+            if (failed.isNotEmpty()) problem = "Couldn't connect to: ${failed.joinToString(", ")}"
             updateUi()
             return
         }
         val device = candidates[candidateIndex++]
         searching = true
+        trying = device
         hid?.connect(device)
         ui.postDelayed(nextCandidate, CONNECT_TIMEOUT_MS)
         updateUi()
