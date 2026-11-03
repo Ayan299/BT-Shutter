@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.btshutter"
+    namespace = "com.ayan.btshutter"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.btshutter"
+        applicationId = "com.ayan.btshutter"
         minSdk = 28
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
     }
 
     signingConfigs {
